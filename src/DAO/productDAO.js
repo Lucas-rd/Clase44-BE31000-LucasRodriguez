@@ -35,6 +35,15 @@ class ProductDAO extends BaseRepository {
         }
     }
 
+    async createProductGraphql(document){
+        try {
+            const doc = await Product.insertMany(document)
+            return doc[0]
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async updateDocument(id, paramsToUpdate){
         try {
             const doc = await Product.updateOne({ _id: id }, {$set: paramsToUpdate})

@@ -4,9 +4,9 @@ import cartRouter from "./cart.routes.js"
 import userRouter from "./user.routes.js"
 import infoRouter from "./info.routes.js"
 import logger from '../utils/logger.js';
-// import { graphqlHTTP } from "express-graphql";
-// import { productSchema } from "../graphql/products.schema.js";
-// import { getProduct } from "../controller/product.graphql.controller.js";
+import { graphqlHTTP } from "express-graphql";
+import { productSchema } from "../graphql/products.schema.js";
+import { createProduct, getProduct, getProducts } from "../controller/product.graphql.controller.js";
 
 const router = Router()
 
@@ -23,16 +23,18 @@ router.use("/products", productRouter)
 router.use("/carts", cartRouter)
 
 //Graphql
-// router.use(
-//     "/graphql", 
-//     graphqlHTTP({
-//       productSchema,
-//       rootValue: {
-//         getProduct: getProduct
-//       },
-//       graphiql: true
-//     })
-//   )
+router.use(
+    "/graphql", 
+    graphqlHTTP({
+      schema: productSchema,
+      rootValue: {
+        getProduct: getProduct,
+        getProducts: getProducts,
+        createProduct: createProduct
+      },
+      graphiql: true
+    })
+  )
 
 
 //Rutas '*'

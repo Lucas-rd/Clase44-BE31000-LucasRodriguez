@@ -22,10 +22,6 @@ import os from 'os';
 import compression from 'compression';
 import logger from './utils/logger.js';
 
-import { graphqlHTTP } from "express-graphql";
-import productSchema from "./graphql/products.schema.js";
-import { getProduct } from "./controller/product.graphql.controller.js";
-
 
 const cpus = os.cpus()
 
@@ -210,18 +206,6 @@ if(isCluster && cluster.isPrimary) {
           io.emit('server:mensajes', normalizedChat)
       })
   })
-  
-// Graphql
-app.use(
-    "/graphql", 
-    graphqlHTTP({
-      productSchema,
-      rootValue: {
-        getProduct: getProduct
-      },
-      graphiql: true
-    })
-  )
 
   //middleware logger para metodos y url
   app.use( (req, res, next) => {

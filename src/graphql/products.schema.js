@@ -8,7 +8,7 @@ const productSchema = buildSchema(`
         code: String,
         thumbnail: String,
         price: Int,
-        Stock: Int,
+        stock: Int,
     }
 
     type Product {
@@ -18,7 +18,7 @@ const productSchema = buildSchema(`
         code: String,
         thumbnail: String,
         price: Int,
-        Stock: Int,
+        stock: Int,
     }
 
     type Query {
@@ -31,4 +31,4 @@ const productSchema = buildSchema(`
     }
 `)
 
-export default productSchema
+export { productSchema }
